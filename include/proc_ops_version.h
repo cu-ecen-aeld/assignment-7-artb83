@@ -10,6 +10,16 @@
 #define __add_proc_ops_compat_ioctl(pops, fops)
 #endif
 
+#ifndef from_timer
+#define from_timer(var, callback_timer, timer_fieldname) \
+    container_of(callback_timer, typeof(*var), timer_fieldname)
+#endif
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 15, 0)
+#define del_timer_sync(t) timer_delete_sync(t)
+#define del_timer(t)      timer_delete(t)
+#endif
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 6, 0)
 #define proc_ops_wrapper(fops, newname)	(fops)
 #else
