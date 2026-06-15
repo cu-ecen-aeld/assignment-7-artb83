@@ -2,6 +2,7 @@
 #define _PROC_OPS_VERSION_H
 
 #include <linux/version.h>
+#include <linux/fs.h>
 
 #ifdef CONFIG_COMPAT
 #define __add_proc_ops_compat_ioctl(pops, fops)					\
@@ -13,6 +14,13 @@
 #ifndef from_timer
 #define from_timer(var, callback_timer, timer_fieldname) \
     container_of(callback_timer, typeof(*var), timer_fieldname)
+#endif
+
+/* Handle the complete removal of no_llseek in modern kernels */
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
+#ifndef no_llseek
+#define no_llseek NULL
+#endif
 #endif
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 15, 0)

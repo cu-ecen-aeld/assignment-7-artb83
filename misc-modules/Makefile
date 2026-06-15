@@ -5,7 +5,7 @@
 # This conditional selects whether we are being included from the
 # kernel Makefile or not.
 
-ccflags-y += -I$(src)/../include
+ccflags-y ?= -I$(src)/../include
 
 ifeq ($(KERNELRELEASE),)
 
