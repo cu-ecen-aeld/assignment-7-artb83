@@ -1,0 +1,16 @@
+#!/bin/sh
+
+case "$1" in
+	start)
+		echo "Loading faulty module" >> /var/log/miscmodules.log
+		insmod /lib/modules/$(uname -r)/extra/faulty.ko >> /var/log/miscmodules.log 2>&1
+		;;
+	stop)
+		echo "Unloading faulty module"
+		rmmod faulty
+		;;
+	*)
+		echo "Usage: $0 {load|unload}"
+		exit 1
+esac
+exit 0
