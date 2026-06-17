@@ -5,7 +5,15 @@
 # This conditional selects whether we are being included from the
 # kernel Makefile or not.
 
-ccflags-y ?= -I$(src)/../include
+
+# 1. Fallback for Local Builds: If $(src) is empty, use standard make mechanics
+ifeq ($(src),)
+    # $(CURDIR) is a built-in GNU Make variable for your local path
+    ccflags-y += -I$(CURDIR)/../include
+else
+    # 2. Fallback for Yocto/Kbuild: Use the standard kernel directory hooks
+    ccflags-y += -I$(src)/../include
+endif
 
 ifeq ($(KERNELRELEASE),)
 
