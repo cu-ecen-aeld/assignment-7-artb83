@@ -3,13 +3,13 @@
 case "$1" in
 	start)
 		echo "Loading faulty and hello modules" >> /var/log/miscmodules.log
-		insmod /lib/modules/$(uname -r)/extra/faulty.ko >> /var/log/miscmodules.log 2>&1
-		insmod /lib/modules/$(uname -r)/extra/hello.ko >> /var/log/miscmodules.log 2>&1
+		./usr/bin/misc_module_load faulty >> /var/log/miscmodules.log 2>&1
+		./usr/bin/misc_module_load hello  >> /var/log/miscmodules.log 2>&1
 		;;
 	stop)
-		echo "Unloading faulty module"
-		rmmod faulty
-		rmmod hello
+		echo "Unloading faulty and hello modules"
+		./usr/bin/misc_module_unload faulty
+		./usr/bin/misc_module_unload hello
 		;;
 	*)
 		echo "Usage: $0 {load|unload}"
