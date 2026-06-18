@@ -8,8 +8,8 @@ case "$1" in
 		;;
 	stop)
 		echo "Unloading faulty and hello modules"
-		./usr/bin/misc_module_unload faulty
-		./usr/bin/misc_module_unload hello
+		./usr/bin/misc_module_unload faulty >> /var/log/miscmodules.log 2>&1
+		./usr/bin/misc_module_unload hello  >> /var/log/miscmodules.log 2>&1
 		;;
 	*)
 		echo "Usage: $0 {load|unload}"
