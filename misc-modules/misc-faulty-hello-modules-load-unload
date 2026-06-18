@@ -7,7 +7,7 @@ case "$1" in
 		./usr/bin/misc_module_load hello  >> /var/log/miscmodules.log 2>&1
 		;;
 	stop)
-		echo "Unloading faulty and hello modules"
+		echo "Unloading faulty and hello modules" >> /var/log/miscmodules.log 2>&1
 		./usr/bin/misc_module_unload faulty >> /var/log/miscmodules.log 2>&1
 		./usr/bin/misc_module_unload hello  >> /var/log/miscmodules.log 2>&1
 		;;
