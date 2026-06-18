@@ -3,11 +3,11 @@
 case "$1" in
 	start)
 		echo "Loading scull module" >> /var/log/scullmodule.log
-		./usr/bin/scull_module_load scull >> /var/log/scullmodule.log 2>&1
+		./usr/bin/scull_module_load >> /var/log/scullmodule.log 2>&1
 		;;
 	stop)
 		echo "Unloading scull module"
-		./usr/bin/scull_module_unload scull >> /var/log/scullmodule.log 2>&1
+		./usr/bin/scull_module_unload >> /var/log/scullmodule.log 2>&1
 		;;
 	*)
 		echo "Usage: $0 {load|unload}"
